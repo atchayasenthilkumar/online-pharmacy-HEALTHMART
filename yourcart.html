@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Pharmacy - Products</title>
+    <link rel="stylesheet" href="pharmacystyle.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: white;
+            background: linear-gradient(#141e30, #243b55);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+        }
+        .cart-modal {
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+        }
+        button {
+            margin: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: blue;
+            color: white;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="cart" class="cart-modal">
+        <div class="cart-content">
+            <img src="C:\Users\ATCHAYA S\Downloads\cart.png">
+            <h2>Your Cart</h2>
+            <ul id="cart-items">
+                <!-- Cart items will be displayed here -->
+            </ul>
+            <p>Total: $<span id="total-price">0</span></p>
+            
+            <button><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/payment.html">Checkout</a></button>
+            <button><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/homepage.html">Close</a></button>
+        </div>
+    </div>
+    <script>
+function loadCart() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartItemsList = document.getElementById('cart-items');
+    const totalPriceElement = document.getElementById('total-price');
+    cartItemsList.innerHTML = '';
+    let totalPrice = 0;
+
+    cart.forEach(product => {
+        const cartItem = document.createElement('li');
+        cartItem.textContent = `${product.name} x${product.quantity} - $${(product.price * product.quantity).toFixed(2)}`;
+        cartItemsList.appendChild(cartItem);
+        totalPrice += product.price * product.quantity;
+    });
+
+    totalPriceElement.textContent = totalPrice.toFixed(2);
+}
+
+// Call this function when the page loads
+window.onload = loadCart;
+
+        
+    </script>
+</body>
+</html>
+
+
+               

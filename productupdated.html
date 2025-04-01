@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Pharmacy - Products</title>
+    <link rel="stylesheet" href="pharmacystyle.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color: white;
+            background: linear-gradient(#141e30, #243b55);
+            text-align: center;
+        }
+        .product {
+            margin: 20px;
+            flex: 1 1 250px;
+            display: inline-block;
+            border: 1px solid #ccc;
+            overflow: hidden;
+            padding: 10px;
+            background: white;
+            color: black;
+            border-radius: 10px;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: grey;
+            color: white;
+        }
+        button a {
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HealthMart</h1>
+        <div class="cart">
+            <button onclick="toggleCart()">Cart (<span id="cart-count">0</span>)</button>
+        </div>
+    </header>
+
+    <main>
+        <section class="products">
+            <h2>Browse Our Products</h2>
+            <div class="product" data-id="1" data-name="Paracetamol" data-price="5">
+                <img src="C:\Users\ATCHAYA S\Downloads\paracetomal.jpeg" alt="Paracetamol">
+                <h3>Paracetamol</h3>
+                <p>Price: $5</p>
+                <button onclick="addToCart(1, 'Paracetamol', 5)">Add to Cart</button>
+            </div>
+            <div class="product" data-id="2" data-name="Ibuprofen" data-price="7">
+                <img src="C:\Users\ATCHAYA S\Downloads\ibuprofen.jpeg" alt="Ibuprofen">
+                <h3>Ibuprofen</h3>
+                <p>Price: $7</p>
+                <button onclick="addToCart(2, 'Ibuprofen', 7)">Add to Cart</button>
+            </div>
+            <div class="product" data-id="3" data-name="Aspirin" data-price="4">
+                <img src="C:\Users\ATCHAYA S\Downloads\asprin.jpeg" alt="Aspirin">
+                <h3>Aspirin</h3>
+                <p>Price: $4</p>
+                <button onclick="addToCart(3, 'Aspirin', 4)">Add to Cart</button>
+            </div>
+            <div class="product" data-id="4" data-name="Saridon" data-price="4">
+                <img src="C:\Users\ATCHAYA S\Downloads\saridon.jpeg" alt="Saridon">
+                <h3>Saridon</h3>
+                <p>Price: $4</p>
+                <button onclick="addToCart(4, 'Saridon', 4)">Add to Cart</button>
+            </div>
+            <br>
+            <button><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/yourcart.html">Next</a></button>
+        </section>
+    </main>
+
+    <script>
+        let cart = [];
+
+        function addToCart(id, name, price) {
+            const existingProduct = cart.find(product => product.id === id);
+            if (existingProduct) {
+                existingProduct.quantity += 1;
+            } else {
+                cart.push({ id, name, price, quantity: 1 });
+            }
+            updateCartCount();
+        }
+
+        function updateCartCount() {
+            const cartCount = cart.reduce((total, product) => total + product.quantity, 0);
+            document.getElementById('cart-count').textContent = cartCount;
+        }
+
+        function toggleCart() {
+            let cartDetails = "your cart:/n";
+            cart.forEach(product => {
+                cartDetails += `${product.name} x${product.quantity} - $${product.price * product.quantity}\n`;
+            });
+            alert(cartDetails || "Your cart is empty.");
+        }
+    </script>
+</body>
+</html>
+

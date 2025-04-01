@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Pharmacy</title>
+    <link rel="stylesheet" href="pharmacystyle.css">
+</head>
+<body>
+    <header>
+        <h1>HealthMart</h1>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/productupdated.html">Products</a></li>
+                <li><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/yourcart.html">Cart</a></li>
+                <li><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/loginpage.html">Login</a></li>
+            </ul>
+        </nav>
+    </header>
+<style>
+   body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            color:white;
+            background: linear-gradient(#141e30, #243b55);
+}
+</style>
+<center>
+<!-- Payment Method Section -->
+<div class="payment-method">
+  <h2>Payment Method</h2><br><br>
+  <form id="payment-form">
+<div class="payment-options">
+      <button>
+      <input type="radio" id="cod" name="payment-method" value="cod">
+      <label for="cod">Cash on Delivery </label></button>
+      <br><br>
+      <button>
+      <input type="radio" id="online-payment" name="payment-method" value="online-payment">
+      <label for="online-payment">Online Payment</label></button><br><br>
+
+      <div class="online-payment-options">
+        <input type="radio" id="credit-card" name="online-payment-method" value="credit-card">
+        <label for="credit-card">Credit Card</label>
+        <br><br>
+
+        <input type="radio" id="debit-card" name="online-payment-method" value="debit-card">
+        <label for="debit-card">Debit Card</label>
+        <br><br>
+
+        <input type="radio" id="net-banking" name="online-payment-method" value="net-banking">
+        <label for="net-banking">Net Banking</label><br><br>
+
+      </div>
+    </div>
+    <div class="payment-details">
+      <label for="card-number">Card Number:</label>
+      <input type="text" id="card-number" name="card-number">
+      <br><br>
+
+      <label for="expiration-date">Expiration Date:</label>
+      <input type="date" id="expiration-date" name="expiration-date">
+      <br><br>
+
+      <label for="cvv">CVV:</label>
+      <input type="text" id="cvv" name="cvv">
+      <br><br>
+
+      <label for="card-holder-name">Card Holder Name:</label>
+      <input type="text" id="card-holder-name" name="card-holder-name">
+    </div><br><br>
+    <button type="submit"><a href="file:///C:/Users/ATCHAYA%20S/Desktop/Full%20STACK/pharmacy-application/orderplaced.html">Place Order</button>
+  </form>
+</div>
+<script>
+// Get the payment form
+const paymentForm = document.getElementById('payment-form');
+
+// Add an event listener to the payment form
+paymentForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+
+  // Get the selected payment method
+  const paymentMethod = document.querySelector('input[name="payment-method"]:checked').value;
+
+  // Check if the payment method is COD
+  if (paymentMethod === 'cod') {
+    // Process COD payment
+    processCODPayment();
+  } else {
+    // Get the selected online payment method
+    const onlinePaymentMethod = document.querySelector('input[name="online-payment-method"]:checked').value;
+
+    // Process online payment
+    processOnlinePayment(onlinePaymentMethod);
+  }
+});
+
+// Function to process COD payment
+function processCODPayment() {
+  // Display a confirmation message
+  alert('Your order has been placed successfully. Please pay the cash on delivery.');
+
+  // Redirect to the order confirmation page
+  window.location.href = 'order-confirmation.html';
+}
+// Function to process online payment
+function processOnlinePayment(onlinePaymentMethod) {
+  // Get the card details
+  const cardNumber = document.getElementById('card-number').value;
+  const expirationDate = document.getElementById('expiration-date').value;
+  const cvv = document.getElementById('cvv').value;
+  const cardHolderName = document.getElementById('card-holder-name').value;
+
+  // Process the online payment
+  // You can integrate a payment gateway API here
+  // For example, you can use the Stripe API
+  const stripe = Stripe('YOUR_STRIPE_API_KEY');
+  stripe.createToken({
+    card: {
+      number: cardNumber,
+      exp_month: expirationDate.split('-')[1],
+      exp_year: expirationDate.split('-')[0],
+      cvc: cvv,
+    },
+  }).then((result) => {
+    if (result.error) {
+      // Display an error message
+      alert(result.error.message);
+    } else {
+      // Display a confirmation message
+      alert('Your order has been placed successfully.');
+
+      // Redirect to the order confirmation page
+      window.location.href = 'order-confirmation.html';
+    }
+  });
+}
+
+</html>
