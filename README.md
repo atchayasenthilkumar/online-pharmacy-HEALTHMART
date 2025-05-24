@@ -5,7 +5,7 @@
 The **Online Pharmacy** is a web-based platform that allows users to browse, search, and order prescription and over-the-counter (OTC) medications. The platform ensures a seamless experience for customers while maintaining compliance with medical and pharmaceutical regulations.
 
 <h2>✅ Features</h2>
-- <h3>User Authentication:</h3> Secure login and registration for customers and pharmacists.
+ <h3>User Authentication:</h3> Secure login and registration for customers and pharmacists.
 - <h3>Medication Search & Filtering:</h3> Search for medicines by name, category, and symptoms.
 - <h3>Prescription Upload:</h3> Customers can upload prescriptions for approval before purchasing certain medications.
 - <h3>Cart & Checkout:</h3> Add medicines to the cart and proceed with secure payment options.
